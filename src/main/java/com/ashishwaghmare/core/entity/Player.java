@@ -5,18 +5,12 @@ import lombok.Builder;
 import lombok.Data;
 
 @Data
-@Builder
-public class PlayerX {
+public class Player {
 
   private String name;
   private final Grid.State symbol;
 
-  public PlayerX(State symbol) {
+  public Player(State symbol) {
     this.symbol = symbol;
-  }
-
-  public boolean move(int row, int column) {
-    //TODO
-    return false;
   }
 }

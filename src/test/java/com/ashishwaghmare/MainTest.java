@@ -25,36 +25,37 @@ public class MainTest {
     Assert.assertEquals(grid.get(2, 2), State.EMPTY);
   }
 
-  //      1. The program then prompts for Player 1 name, followed by their preferred symbol; assigns a default 'X'.
+  //1. The program then prompts for Player 1 name, followed by their preferred symbol; assigns a default 'X'.
   @Test
   public void askPreferencePlayer1_defaultX() {
     Game game = new Game();
-    Player player1 = game.getPlayer(1);
-    Assert.assertEquals(player1.getSymbol(), State.MARKED_X);
+    Player player1 = game.getPlayer("Player1", State.X);
+    Assert.assertEquals(player1.getSymbol(), State.X);
   }
 
-  //      1. Same for Player 2 name, followed by their preferred symbol; assigns a default 'O'.
+  //1. Same for Player 2 name, followed by their preferred symbol; assigns a default 'O'.
   @Test
   public void askPreferencePlayer2_defaultO() {
     Game game = new Game();
-    Player player2 = game.getPlayer(2);
-    Assert.assertEquals(player2.getSymbol(), State.MARKED_O);
+    Player player2 = game.getPlayer("Player2", State.O);
+    Assert.assertEquals(player2.getSymbol(), State.O);
   }
 
-  //      1. Players take turns making their move. If a step is illegal or invalid, the program prints out the error and asks them to enter again.
+  //1. Players take turns making their move. If a step is illegal or invalid, the program prints out the error and asks them to enter again.
   @Test
   public void onTurn_askMove() {
     Game game = new Game();
     Player currentPlayer = game.getActivePlayer();
-    Assert.assertTrue(currentPlayer.move(1, 2));
+    Assert.assertTrue(game.move(1, 2));
   }
 
-  //      1. The game continues until it's over, when the game is over, it announces the result.
+  //1. The game continues until it's over, when the game is over, it announces the result.
   @Test
   public void onMultipleMoves_gameOver() {
     Game game = new Game();
+    game.getPlayer("test", State.O);
     Player currentPlayer = game.getActivePlayer();
-    Assert.assertTrue(currentPlayer.move(1, 2));
-    Assert.assertFalse(game.isOver());
+    game.move(1, 2);
+    Assert.assertFalse(game.isDone());
   }
 }
