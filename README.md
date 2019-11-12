@@ -23,27 +23,31 @@ On linux
     java -jar build/libs/tic-tac-toe-1.0-SNAPSHOT.jar 
 
 ## Implementation
-Based on GRASP principals below could be classes
+Based on OOPS/GRASP principals below could be classes
 
 Nouns
 
-Game : tic-tac-toe
-Methods:
-      over
-
-Grid:
-   empty
-
-Players:
-    name
-    preferred-symbol: (X : 0)
-Verbs:
-
+    Players:
+            name
+            preferred-symbol: (X : 0)
+        play,taketurn,move     
+    Game : tic-tac-toe
+      has 
+        Grid:
+           empty
+    
+    
+    
 ## Testing
 
 Horizontal and Vertical cases are passing.
 Only 3x3 grid has been tests
 Only square grid is know to be working
 
-##TODO
-Test for rectangle grid 
+## TODO
+
+1. Test for rectangle grid
+1. Segregate entity from use cases
+1. Potential expose REST api
+1. Test more dimensions of grid
+1. Test more than 2 players
