@@ -37,6 +37,21 @@ public class Game {
     return symbol2Player.get(currentSymbol);
   }
 
+  public boolean move(int position) {
+    return move(position / grid.getRows(), position % grid.getColumns());
+  }
+
+  public boolean simulate(int... moves) {
+    for (int position : moves) {
+      if (!move(position / grid.getRows(), position % grid.getColumns())) {
+        return false;
+      }
+    }
+    grid.isDone(currentSymbol);
+    nextTurn();
+    return true;
+  }
+
   public boolean move(int row, int column) {
     return grid.mark(row, column, currentSymbol);
   }

@@ -5,6 +5,12 @@ import lombok.Data;
 @Data
 public class Grid {
 
+  public void row(final int row, final State col1, final State col2, final State col3) {
+    cells[row][0] = col1;
+    cells[row][1] = col2;
+    cells[row][2] = col3;
+  }
+
   public enum State {
     EMPTY(" "),
     O("O"),
@@ -59,32 +65,34 @@ public class Grid {
 
 
   public boolean isDone(State symbol) {
-    //TODO use better algorithm
-    int[] verticalCount = new int[rows];
-    int[] horizontalCount = new int[columns];
-    int[] diagnolCount = new int[columns];
-    int[] antiDiagnolCount = new int[columns];
+
+    int[] verticalLines = new int[rows];
+    int[] horizontalLines = new int[columns];
+
+    //Diagonal lines will have more than max rows or columns. Mostly twice and middle one
+    int maxIndex = columns - 1;
+    int maxDiagonalLines = maxIndex * 2 + 1;
+    int[] diagonalLines = new int[maxDiagonalLines];
+    int[] reverseDiagonalLines = new int[maxDiagonalLines];
+
     for (int row = 0; row < rows; row++) {
       for (int column = 0; column < columns; column++) {
         if (cells[row][column] == symbol) {
-          if (++verticalCount[row] == rows) {
+          if (++verticalLines[column] == rows) {
             return true;
           }
-          if (++horizontalCount[column] == columns) {
+          if (++horizontalLines[row] == columns) {
             return true;
           }
-          //Diagonal checks TODO not working
-          if (row == column) {
-            if (++antiDiagnolCount[column] == columns) {
-              return true;
-            }
-            if (++diagnolCount[row] == rows) {
-              return true;
-            }
+          int slope = row - column;
+          int reverseSloppe = row + column;
+          //Slope can be negative and can't be stored hence subtracting from high number
+          if (++diagonalLines[maxIndex - slope] == columns) {
+            return true;
           }
-        } else {
-          verticalCount[row] = -rows;
-          horizontalCount[column] = -columns;
+          if (++reverseDiagonalLines[reverseSloppe] == rows) {
+            return true;
+          }
         }
       }
     }

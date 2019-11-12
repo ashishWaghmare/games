@@ -41,7 +41,9 @@ Verbs:
 
 ## Testing
 
-Horizontal and Vertical cases are passing. But diagonal check for winner has failed 
+Horizontal and Vertical cases are passing.
+Only 3x3 grid has been tests
+Only square grid is know to be working
 
-### Known Issues
-Diagonal grid check will not present winner
+##TODO
+Test for rectangle grid 
