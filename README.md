@@ -25,6 +25,8 @@ On linux
 ## Implementation
 Based on OOPS/GRASP principals below could be classes
 
+![Circle Layers](clean-architecture.png)
+
 Nouns
 
     Players:
